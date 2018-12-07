@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     Plug 'scrooloose/nerdcommenter'
     Plug 'sheerun/vim-polyglot'
-    Plug 'w0rp/ale'
+    " Plug 'w0rp/ale'
     Plug 'junegunn/vim-plug'
 call plug#end()
 
@@ -49,8 +49,15 @@ set number
 set showcmd
 set hlsearch
 set nowrap
+set splitbelow
+set autoindent
+" map <F2> to open vimrc
+map <F2> :split ~/.vim/vimrc<CR>
 
 " set tab behavior
 set tabstop=4
 set shiftwidth=4
 set expandtab
+
+" testing out some mappings
+imap ;cl console.log();<left><left>
