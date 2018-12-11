@@ -90,3 +90,13 @@ run `phpcs -e` to see the current standard, `phpcs -i` to see the available stan
 ```
 phpcs --config-set default_standard PSR2
 ```
+
+---
+
+### Other tricks
+
+`:qall` to quit all windows at once
+[You Don't Need Plugins](https://www.youtube.com/watch?v=XA2WjJbmmoM)
+for HTML: `cit` change inner tag, it works if you're inside the tag definition and not just between opening and closing tags
+you can verb a search
+`c/word<CR>` will delete everything up to "word" and enter insert mode

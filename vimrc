@@ -46,12 +46,17 @@ let mapleader = "\<Space>"
 
 " some vim basics
 set number
+" just trying out relativenumber for fun
+set relativenumber
 set showcmd
 set hlsearch
 set nowrap
 set splitbelow
 set autoindent
-" map <F2> to open vimrc
+" No compatible basically says don't bother pretending to be vi
+set nocompatible
+syntax enable
+
 map <F2> :split ~/.vim/vimrc<CR>
 
 " set tab behavior
