@@ -53,6 +53,7 @@ set splitbelow
 set autoindent
 " map <F2> to open vimrc
 map <F2> :split ~/.vim/vimrc<CR>
+map <F4> :! node %<CR>
 
 " set tab behavior
 set tabstop=4
