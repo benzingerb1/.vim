@@ -1,4 +1,4 @@
-#.vim
+# .vim
 
 ### Vim settings
 
@@ -7,7 +7,7 @@
 + Leader key set to `<Space>`
 + Tab expands to 4 spaces
 
-###vim-plug
+### vim-plug
 [GitHub](https://github.com/junegunn/vim-plug)
 Plugins are automatically pulled from GitHub.  
 
@@ -18,7 +18,7 @@ Plugins are automatically pulled from GitHub.
 
 ---
 
-###onedark.vim
+### onedark.vim
 [GitHub](https://github.com/joshdick/onedark.vim)
 
 ---
@@ -34,7 +34,7 @@ let g:AutoClosePreserveDotReg = 0
 ---
 
 
-###Emmet-vim
+### Emmet-vim
 [GitHub](https://github.com/mattn/emmet-vim)
 Emmet's leader key is mapped to `<C-N>` with the following line:
 
@@ -44,13 +44,13 @@ let g:user_emmet_leader_key='<C-N>'
 
 ---
 
-###NERDTree
+### NERDTree
 [GitHub](https://github.com/scrooloose/nerdtree)
 Mapped to toggle on `<F6>` key, loaded "on-demand" by vim-plug
 
 ---
 
-###NERD Commenter
+### NERD Commenter
 [GitHub](https://github.com/scrooloose/nerdcommenter)
 This uses `<Leader>` heavily, which I've set to `<Space>`. 
 
@@ -62,7 +62,7 @@ let g:NERDSpaceDelims = 1
 
 ---
 
-###vim-polyglot
+### vim-polyglot
 [GitHub](https://github.com/sheerun/vim-polyglot)
 This helps color the syntax for different file types. 
 Turn off polyglot for markdown because it's a lot uglier than native vim/onedark colors:
@@ -73,7 +73,7 @@ let g:polyglot_disabled = ['markdown']
 
 ---
 
-###Asynchronous Lint Engine (ALE)
+### Asynchronous Lint Engine (ALE)
 [GitHub](https://github.com/w0rp/ale)
 This uses linters that already exist in your global path.  Getting those linters set up is a different challenge
 
@@ -90,3 +90,13 @@ run `phpcs -e` to see the current standard, `phpcs -i` to see the available stan
 ```
 phpcs --config-set default_standard PSR2
 ```
+
+---
+
+### Other tricks
+
+`:qall` to quit all windows at once
+[You Don't Need Plugins](https://www.youtube.com/watch?v=XA2WjJbmmoM)
+for HTML: `cit` change inner tag, it works if you're inside the tag definition and not just between opening and closing tags
+you can verb a search
+`c/word<CR>` will delete everything up to "word" and enter insert mode
