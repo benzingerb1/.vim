@@ -100,3 +100,23 @@ phpcs --config-set default_standard PSR2
 for HTML: `cit` change inner tag, it works if you're inside the tag definition and not just between opening and closing tags
 you can verb a search
 `c/word<CR>` will delete everything up to "word" and enter insert mode
+`:scriptnames` will tell you what's been loaded
+check things that have been remapped:
+`:verbose map <C-N>`
+`:verbose nmap <C-R>`
+`:verbose cmap <C-K>` command mode
+`:verbose imap <C-O>`
+check defaults:
+`:h index`
+open a terminal (this is probably how I'm going to test a script without dropping my current view of the code):
+`:terminal`
+setlocal buffer:
+`:setlocal relativenumber`
+
+where to add specific settings
+~.vim/after/ftplugin/javacript.vim
+~.vim/after/ftplugin/python.vim
+read more in :h after and :ftplugin
+
+I want to write FileType specific vimrc stuff:
+`:h write-plugin`

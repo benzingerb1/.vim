@@ -4,10 +4,10 @@
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'
-    Plug 'Townk/vim-autoclose'
-    Plug 'mattn/emmet-vim'
+    " Plug 'Townk/vim-autoclose'
+    " Plug 'mattn/emmet-vim'
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-    Plug 'scrooloose/nerdcommenter'
+    " Plug 'scrooloose/nerdcommenter'
     Plug 'sheerun/vim-polyglot'
     " Plug 'w0rp/ale'
     Plug 'junegunn/vim-plug'
@@ -18,9 +18,11 @@ colorscheme onedark
 " autoclose
 let g:AutoClosePreserveDotReg = 0
 " Emmet
-let g:user_emmet_leader_key='<C-N>'
+" let g:user_emmet_leader_key='<C-N>'
 " NERDTree
 map <F6> :NERDTreeToggle<CR>
+let NERDTreeShowLineNumbers=1
+autocmd FileType nerdtree setlocal relativenumber
 " NERD Commenter
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
@@ -46,8 +48,8 @@ let mapleader = "\<Space>"
 
 " some vim basics
 set number
-" just trying out relativenumber for fun
-set relativenumber
+" just trying out relativenumber for fun note: I didn't like it
+" set relativenumber
 set showcmd
 set hlsearch
 set nowrap
@@ -57,13 +59,31 @@ set autoindent
 set nocompatible
 syntax enable
 
-map <F2> :split ~/.vim/vimrc<CR>
-map <F4> :! node %<CR>
+noremap <F2> :split $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+autocmd FileType javascript noremap <F4> :w<CR>:! node %<CR>
+autocmd FileType python noremap <F4> :w<CR>:! python %<CR>
 
 " set tab behavior
 set tabstop=4
 set shiftwidth=4
 set expandtab
+" when you tab and >> and <C-T> it will automatically round out to 4
+set shiftround
 
+" this looks like a neat rabbit hole:
+" :h 'sm
+" that moment where the {} match each other is a lot shorter, less annoying
+set matchtime=2
+" let loaded_match_paren=1
 " testing out some mappings
-imap ;cl console.log();<left><left>
+nnoremap <leader>d ^d$a
+noremap <leader>n :noh<CR>
+noremap <leader>r :setlocal relativenumber!<CR>
+function! Eatchar(pat)
+    let c = nr2char(getchar(0))
+    return (c =~ a:pat) ? '' : c
+endfunc
+:autocmd FileType javascript iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
+" get rid of BS in insert mode until I can learn to backspace using <C-H>
+inoremap <BS> <nop>
