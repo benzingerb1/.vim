@@ -4,7 +4,6 @@
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'
-    " Plug 'Townk/vim-autoclose'
     " Plug 'mattn/emmet-vim'
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
     " Plug 'scrooloose/nerdcommenter'
@@ -55,8 +54,7 @@ set hlsearch
 set nowrap
 set splitbelow
 set autoindent
-" No compatible basically says don't bother pretending to be vi
-set nocompatible
+set nocompatible " No compatible basically says don't bother pretending to be vi
 syntax enable
 
 noremap <F2> :split $MYVIMRC<CR>
