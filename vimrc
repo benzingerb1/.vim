@@ -4,12 +4,12 @@
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'
-    " Plug 'mattn/emmet-vim'
+    Plug 'mattn/emmet-vim'
     Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-    " Plug 'scrooloose/nerdcommenter'
     Plug 'sheerun/vim-polyglot'
-    " Plug 'w0rp/ale'
+    Plug 'Yggdroot/indentLine'
     Plug 'junegunn/vim-plug'
+"    Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
 " onedark
@@ -17,7 +17,7 @@ colorscheme onedark
 " autoclose
 let g:AutoClosePreserveDotReg = 0
 " Emmet
-" let g:user_emmet_leader_key='<C-N>'
+let g:user_emmet_leader_key='<C-N>'
 " NERDTree
 map <F6> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
