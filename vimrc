@@ -68,6 +68,8 @@ set shiftwidth=4
 set expandtab
 " when you tab and >> and <C-T> it will automatically round out to 4
 set shiftround
+" format options: don't automatically insert comments on i_o or i_O
+set fo-=o
 
 " this looks like a neat rabbit hole:
 " :h 'sm

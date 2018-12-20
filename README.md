@@ -23,17 +23,6 @@ Plugins are automatically pulled from GitHub.
 
 ---
 
-###vim-autoclose
-[GitHub](https://github.com/Townk/vim-autoclose)
-This causes a lag on the `<Esc>` key, circumvented with the following line of code:
-
-```
-let g:AutoClosePreserveDotReg = 0
-```
-
----
-
-
 ### Emmet-vim
 [GitHub](https://github.com/mattn/emmet-vim)
 Emmet's leader key is mapped to `<C-N>` with the following line:
