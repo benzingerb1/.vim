@@ -12,20 +12,13 @@ call plug#begin('~/.vim/plugged')
 "    Plug 'jiangmiao/auto-pairs'
 call plug#end()
 
-" onedark
 colorscheme onedark
-" autoclose
-let g:AutoClosePreserveDotReg = 0
-" Emmet
+" Emmet leader key
 let g:user_emmet_leader_key='<C-N>'
 " NERDTree
 map <F6> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal relativenumber
-" NERD Commenter
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDDefaultAlign = 'left'
 " vim-polyglot
 let g:polyglot_disabled = ['markdown']
 
@@ -41,20 +34,18 @@ inoremap <C-k> <Esc>:m .-2<CR>==g
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
-
 " Leader key mapped to space
 let mapleader = "\<Space>"
 
 " some vim basics
 set number
-" just trying out relativenumber for fun note: I didn't like it
-" set relativenumber
 set showcmd
 set hlsearch
 set nowrap
 set splitbelow
 set autoindent
 set nocompatible " No compatible basically says don't bother pretending to be vi
+set timeoutlen=1000 ttimeoutlen=0 " fix the annoying delay on esc
 syntax enable
 
 noremap <F2> :split $MYVIMRC<CR>
