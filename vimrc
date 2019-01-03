@@ -78,3 +78,13 @@ endfunc
 :autocmd FileType javascript iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
 " get rid of BS in insert mode until I can learn to backspace using <C-H>
 inoremap <BS> <nop>
+
+" I'm going to try mouse resizing
+set mouse=n
+set ttymouse=xterm2
+set encoding=UTF-8
+" Window resize via Alt + Shift + arrows
+map <A-S-Left> <C-W>>
+map <A-S-Right> <C-W><
+map <A-S-Up> <C-W>+
+map <A-S-Down> <C-W>-
