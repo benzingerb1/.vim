@@ -14,7 +14,7 @@ call plug#end()
 
 colorscheme onedark
 " Emmet leader key
-let g:user_emmet_leader_key='<C-N>'
+let g:user_emmet_leader_key='<C-B>'
 " NERDTree
 map <F6> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
