@@ -14,7 +14,7 @@ call plug#end()
 
 colorscheme onedark
 " Emmet leader key
-let g:user_emmet_leader_key='<C-B>'
+let g:user_emmet_expandabbr_key = '<Tab>'
 " NERDTree
 map <F6> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
@@ -34,6 +34,10 @@ inoremap <C-k> <Esc>:m .-2<CR>==g
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+" move left and right in insert mode, similar to bash terminal
+inoremap <C-b> <C-o>h
+inoremap <C-f> <C-o>l
+
 " Leader key mapped to space
 let mapleader = "\<Space>"
 
@@ -48,6 +52,7 @@ set nocompatible " No compatible basically says don't bother pretending to be vi
 set timeoutlen=1000 ttimeoutlen=0 " fix the annoying delay on esc
 syntax enable
 
+" open VIMRC
 noremap <F2> :split $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 autocmd FileType javascript noremap <F4> :w<CR>:! node %<CR>
@@ -60,17 +65,18 @@ set expandtab
 " when you tab and >> and <C-T> it will automatically round out to 4
 set shiftround
 " format options: don't automatically insert comments on i_o or i_O
-set fo-=o
+set formatoptions-=cro
 
 " this looks like a neat rabbit hole:
 " :h 'sm
 " that moment where the {} match each other is a lot shorter, less annoying
-set matchtime=2
+set matchtime=1
 " let loaded_match_paren=1
 " testing out some mappings
 nnoremap <leader>d ^d$a
 noremap <leader>n :noh<CR>
 noremap <leader>r :setlocal relativenumber!<CR>
+noremap <leader>" :s/"/'/g<CR>:noh<CR>
 function! Eatchar(pat)
     let c = nr2char(getchar(0))
     return (c =~ a:pat) ? '' : c
