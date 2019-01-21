@@ -13,8 +13,8 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 colorscheme onedark
-" Emmet leader key
-let g:user_emmet_expandabbr_key = '<Tab>'
+" Emmet leader key WOW finding a leader key that works is such a pain
+" let g:user_emmet_expandabbr_key = '<Tab>'
 " NERDTree
 map <F6> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
@@ -35,8 +35,8 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
 " move left and right in insert mode, similar to bash terminal
-inoremap <C-b> <C-o>h
-inoremap <C-f> <C-o>l
+inoremap <C-b> <Esc>i
+inoremap <C-f> <C-o>a
 
 " Leader key mapped to space
 let mapleader = "\<Space>"
@@ -76,7 +76,7 @@ set matchtime=1
 nnoremap <leader>d ^d$a
 noremap <leader>n :noh<CR>
 noremap <leader>r :setlocal relativenumber!<CR>
-noremap <leader>" :s/"/'/g<CR>:noh<CR>
+noremap <leader>" :s/"/'/g<CR>:noh<CR><C-O>
 function! Eatchar(pat)
     let c = nr2char(getchar(0))
     return (c =~ a:pat) ? '' : c
