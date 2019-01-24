@@ -89,8 +89,9 @@ inoremap <BS> <nop>
 set mouse=n
 set ttymouse=xterm2
 set encoding=UTF-8
-" Window resize via Alt + Shift + arrows
-map <A-S-Left> <C-W>>
-map <A-S-Right> <C-W><
-map <A-S-Up> <C-W>+
-map <A-S-Down> <C-W>-
+
+" alter <C-N> autocomplete behavior
+inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
+inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
