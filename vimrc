@@ -55,7 +55,6 @@ syntax enable
 " open VIMRC
 noremap <F2> :split $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
-autocmd FileType javascript noremap <F4> :w<CR>:! node %<CR>
 autocmd FileType python noremap <F4> :w<CR>:! python %<CR>
 
 " set tab behavior
@@ -81,7 +80,7 @@ function! Eatchar(pat)
     let c = nr2char(getchar(0))
     return (c =~ a:pat) ? '' : c
 endfunc
-:autocmd FileType javascript iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
+" :autocmd FileType javascript iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
 " get rid of BS in insert mode until I can learn to backspace using <C-H>
 inoremap <BS> <nop>
 
@@ -91,7 +90,5 @@ set ttymouse=xterm2
 set encoding=UTF-8
 
 " alter <C-N> autocomplete behavior
-inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-inoremap <expr> j ((pumvisible())?("\<C-n>"):("j"))
-inoremap <expr> k ((pumvisible())?("\<C-p>"):("k"))
+" inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
+" inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
