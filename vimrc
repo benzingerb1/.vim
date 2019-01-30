@@ -16,7 +16,7 @@ colorscheme onedark
 " Emmet leader key WOW finding a leader key that works is such a pain
 " let g:user_emmet_expandabbr_key = '<Tab>'
 " NERDTree
-map <F6> :NERDTreeToggle<CR>
+noremap <F6> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal relativenumber
 " vim-polyglot
@@ -61,26 +61,22 @@ autocmd FileType python noremap <F4> :w<CR>:! python %<CR>
 set tabstop=4
 set shiftwidth=4
 set expandtab
-" when you tab and >> and <C-T> it will automatically round out to 4
-set shiftround
-" format options: don't automatically insert comments on i_o or i_O
-set formatoptions-=cro
-
-" this looks like a neat rabbit hole:
-" :h 'sm
-" that moment where the {} match each other is a lot shorter, less annoying
-set matchtime=1
+set shiftround " when you tab and >> and <C-T> it will automatically round out to 4
+set formatoptions-=cro " format options: don't automatically insert comments on i_o or i_O
+set matchtime=1 " that moment where the {} match each other is a lot shorter, less annoying, read more-  :h 'sm
 " let loaded_match_paren=1
 " testing out some mappings
 nnoremap <leader>d ^d$a
 noremap <leader>n :noh<CR>
 noremap <leader>r :setlocal relativenumber!<CR>
-noremap <leader>" :s/"/'/g<CR>:noh<CR><C-O>
+noremap <leader>" :s/'/"/g<CR>:noh<CR><C-O>
+noremap <leader>' :s/"/'/g<CR>:noh<CR><C-O>
 function! Eatchar(pat)
     let c = nr2char(getchar(0))
     return (c =~ a:pat) ? '' : c
 endfunc
 " :autocmd FileType javascript iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
+iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
 " get rid of BS in insert mode until I can learn to backspace using <C-H>
 inoremap <BS> <nop>
 
@@ -89,6 +85,6 @@ set mouse=n
 set ttymouse=xterm2
 set encoding=UTF-8
 
-" alter <C-N> autocomplete behavior
-" inoremap <expr> <TAB> pumvisible() ? "\<C-y>" : "\<CR>"
-" inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+" wrap words in quotes
+nnoremap "" viw<esc>a"<esc>bi"<esc>lel
+nnoremap "' viw<esc>a'<esc>bi'<esc>lel
