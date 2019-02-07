@@ -88,3 +88,6 @@ set encoding=UTF-8
 " wrap words in quotes
 nnoremap "" viw<esc>a"<esc>bi"<esc>lel
 nnoremap "' viw<esc>a'<esc>bi'<esc>lel
+
+" copy current buffer path to clipboard
+noremap <silent> <F4> :let @+=expand("%:p")<CR>
