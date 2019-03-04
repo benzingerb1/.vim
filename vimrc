@@ -12,6 +12,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/vim-plug'
 call plug#end()
 
+" Set plugin variables "
 colorscheme onedark
 " Emmet leader key WOW finding a leader key that works is such a pain
 let g:user_emmet_expandabbr_key = '<C-@>'
@@ -58,11 +59,19 @@ syntax enable
 
 " open VIMRC
 noremap <F2> :split $MYVIMRC<CR>
-nnoremap <leader>sv :source $MYVIMRC<CR>
+" toggle wordwrap
+noremap <F3> :setlocal wrap!<CR>
+" copy current buffer path to clipboard
+noremap <silent> <F4> :let @+=expand("%:p")<CR>
 autocmd FileType python noremap <F4> :w<CR>:! python %<CR>
+" delete trailing spaces and fix indentation
+nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>gg=G<C-o><C-o>
+
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
 " if file type is asp, set syntax to php
 augroup asp_php
-  au!
+  autocmd!
   autocmd BufNewFile,BufRead *.asp set syntax=php
 augroup END
 
@@ -97,6 +106,7 @@ nnoremap U :echo "TURN OFF CAPS LOCK"<CR>
 nnoremap KJ :echo "TURN OFF CAPS LOCK"<CR>
 nnoremap K :echo "TURN OFF CAPS LOCK"<CR>
 
+
 inoremap <C-d> <Del>
 
 " I'm going to try mouse resizing
@@ -108,10 +118,6 @@ set encoding=UTF-8
 nnoremap "" viw<esc>a"<esc>bi"<esc>lel
 nnoremap "' viw<esc>a'<esc>bi'<esc>lel
 
-" copy current buffer path to clipboard
-noremap <silent> <F4> :let @+=expand("%:p")<CR>
-" delete trailing spaces and fix indentation
-nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>gg=G<C-o><C-o>
 " copy to clipboard
 set clipboard=unnamedplus
 
@@ -122,3 +128,9 @@ nnoremap H ^
 set path+=/php/includes
 
 let g:airline_powerline_fonts = 1
+
+
+augroup filetype_html
+    autocmd!
+    autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
+augroup END
