@@ -22,7 +22,7 @@ noremap <F6> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
 autocmd FileType nerdtree setlocal relativenumber
 " vim-polyglot
-let g:polyglot_disabled = ['markdown']
+let g:polyglot_disabled = ['markdown', 'php']
 " this is from StanAngeloff/php.vim, which is coming form vim-polyglot
 let php_sql_query = 1
 
@@ -38,9 +38,6 @@ inoremap <C-k> <Esc>:m .-2<CR>==
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
-" move left and right in insert mode, similar to bash terminal
-inoremap <C-b> <Left>
-inoremap <C-f> <Right>
 
 " Leader key mapped to space
 let mapleader = "\<Space>"
@@ -83,12 +80,17 @@ set shiftround " when you tab and >> and <C-T> it will automatically round out t
 set formatoptions-=cro " format options: don't automatically insert comments on i_o or i_O
 set matchtime=1 " that moment where the {} match each other is a lot shorter, less annoying, read more-  :h 'sm
 " let loaded_match_paren=1
-" testing out some mappings
+
+" leader mappings
 nnoremap <leader>d ^d$a
 noremap <silent> <leader>n :noh<CR>
 noremap <leader>r :setlocal relativenumber!<CR>
 noremap <leader>" :s/'/"/g<CR>:noh<CR><C-O>
 noremap <leader>' :s/"/'/g<CR>:noh<CR><C-O>
+nnoremap <leader>[ f[lviw<esc>a'<esc>bi'<esc>lel
+
+
+" this is for moving the cursor after expanding abbreviations
 function! Eatchar(pat)
     let c = nr2char(getchar(0))
     return (c =~ a:pat) ? '' : c
@@ -100,14 +102,11 @@ iabbrev <silent> pre; echo "<pre>";<C-R>=Eatchar('\s')<CR>
 iabbrev <silent> br; echo "<br>";<C-R>=Eatchar('\s')<CR>
 iabbrev <silent> dd; ddump();<left><left><C-R>=Eatchar('\s')<CR>
 
-" get rid of BS in insert mode until I can learn to backspace using <C-H>
-inoremap <BS> <nop>
 nnoremap U :echo "TURN OFF CAPS LOCK"<CR>
 nnoremap KJ :echo "TURN OFF CAPS LOCK"<CR>
 nnoremap K :echo "TURN OFF CAPS LOCK"<CR>
 
 
-inoremap <C-d> <Del>
 
 " I'm going to try mouse resizing
 set mouse=n
@@ -122,8 +121,20 @@ nnoremap "' viw<esc>a'<esc>bi'<esc>lel
 set clipboard=unnamedplus
 
 " trying out a new binding recommendation, H and L will jump to end line/start
-nnoremap L $
-nnoremap H ^
+" nnoremap L $
+" nnoremap H ^
+" inoremap <C-d> <Del>
+" inoremap <BS> <nop>
+" inoremap <C-b> <Left>
+" inoremap <C-f> <Right>
+nnoremap L :echo "Try your new keyboard bindings"<CR>
+nnoremap H :echo "Try your new keyboard bindings"<CR>
+inoremap <C-d> <nop>
+inoremap <C-h> <nop>
+inoremap <C-b> <nop>
+inoremap <C-f> <nop>
+ 
+
 
 set path+=/php/includes
 
