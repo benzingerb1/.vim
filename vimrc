@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'sheerun/vim-polyglot'
     Plug 'Yggdroot/indentLine'
     Plug 'vim-airline/vim-airline'
+    Plug 'vim-scripts/dbext.vim'
     Plug 'junegunn/vim-plug'
 call plug#end()
 
@@ -52,15 +53,15 @@ set autoindent
 set nocompatible " No compatible basically says don't bother pretending to be vi
 set timeoutlen=1000 ttimeoutlen=50 " fix the annoying delay on esc
 set ignorecase " prefix searches with \C to set them as case-sensitive
+set showcmd
 syntax enable
 
 " open VIMRC
-noremap <F2> :split $MYVIMRC<CR>
+noremap <F2> :tabnew $MYVIMRC<CR>
 " toggle wordwrap
 noremap <F3> :setlocal wrap!<CR>
 " copy current buffer path to clipboard
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
-autocmd FileType python noremap <F4> :w<CR>:! python %<CR>
 " delete trailing spaces and fix indentation
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>gg=G<C-o><C-o>
 
@@ -121,14 +122,14 @@ nnoremap "' viw<esc>a'<esc>bi'<esc>lel
 set clipboard=unnamedplus
 
 " trying out a new binding recommendation, H and L will jump to end line/start
-" nnoremap L $
-" nnoremap H ^
+nnoremap L $
+nnoremap H ^
 " inoremap <C-d> <Del>
 " inoremap <BS> <nop>
 " inoremap <C-b> <Left>
 " inoremap <C-f> <Right>
-nnoremap L :echo "Try your new keyboard bindings"<CR>
-nnoremap H :echo "Try your new keyboard bindings"<CR>
+" nnoremap L :echo "Try your new keyboard bindings"<CR>
+" nnoremap H :echo "Try your new keyboard bindings"<CR>
 inoremap <C-d> <nop>
 inoremap <C-h> <nop>
 inoremap <C-b> <nop>
@@ -137,6 +138,9 @@ inoremap <C-f> <nop>
 
 
 set path+=/php/includes
+set path+=/php/smarty/templates
+set path+=/var/www/Prosum
+set path+=/var/www/Prosum/JSIncludes
 
 let g:airline_powerline_fonts = 1
 
