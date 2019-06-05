@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/vim-plug'
 call plug#end()
 
+
 " Set plugin variables "
 colorscheme onedark
 " Emmet leader key WOW finding a leader key that works is such a pain
@@ -52,8 +53,8 @@ set splitbelow
 set autoindent
 set nocompatible " No compatible basically says don't bother pretending to be vi
 set timeoutlen=1000 ttimeoutlen=50 " fix the annoying delay on esc
-set ignorecase " prefix searches with \C to set them as case-sensitive
-set showcmd
+" set ignorecase " prefix searches with \C to set them as case-sensitive
+set smartcase " search with no capitals is case insensitive, with caps is case sensitive
 syntax enable
 
 " open VIMRC
@@ -135,7 +136,8 @@ inoremap <C-h> <nop>
 inoremap <C-b> <nop>
 inoremap <C-f> <nop>
  
-
+" let g:dbext_default_profile_live_export = 'type=MYSQL:user=root:passwd=`cat ./dbext_pw.txt`:dbname=publicschoolworks'
+let g:dbext_default_buffer_lines = 50
 
 set path+=/php/includes
 set path+=/php/smarty/templates
