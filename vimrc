@@ -5,9 +5,9 @@
 call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'
     Plug 'mattn/emmet-vim'
-    Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-    Plug 'sheerun/vim-polyglot'
-    Plug 'Yggdroot/indentLine'
+    " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+    " Plug 'sheerun/vim-polyglot'
+    " Plug 'Yggdroot/indentLine'
     Plug 'vim-airline/vim-airline'
     Plug 'vim-scripts/dbext.vim'
     Plug 'junegunn/vim-plug'
@@ -53,8 +53,8 @@ set splitbelow
 set autoindent
 set nocompatible " No compatible basically says don't bother pretending to be vi
 set timeoutlen=1000 ttimeoutlen=50 " fix the annoying delay on esc
-" set ignorecase " prefix searches with \C to set them as case-sensitive
-set smartcase " search with no capitals is case insensitive, with caps is case sensitive
+set ignorecase " prefix searches with \C to set them as case-sensitive
+" set smartcase " search with no capitals is case insensitive, with caps is case sensitive
 syntax enable
 
 " open VIMRC
@@ -145,7 +145,6 @@ set path+=/var/www/Prosum
 set path+=/var/www/Prosum/JSIncludes
 
 let g:airline_powerline_fonts = 1
-
 
 augroup filetype_html
     autocmd!
