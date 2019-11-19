@@ -6,13 +6,16 @@ call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'
     Plug 'mattn/emmet-vim'
     " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-    " Plug 'sheerun/vim-polyglot'
+    Plug 'sheerun/vim-polyglot'
     " Plug 'Yggdroot/indentLine'
     Plug 'vim-airline/vim-airline'
+    Plug 'google/vim-searchindex'
     Plug 'vim-scripts/dbext.vim'
     Plug 'junegunn/vim-plug'
 call plug#end()
 
+" set diffopt color
+set diffopt=iwhite
 
 " Set plugin variables "
 colorscheme onedark
@@ -54,6 +57,7 @@ set autoindent
 set nocompatible " No compatible basically says don't bother pretending to be vi
 set timeoutlen=1000 ttimeoutlen=50 " fix the annoying delay on esc
 set ignorecase " prefix searches with \C to set them as case-sensitive
+set nostartofline
 " set smartcase " search with no capitals is case insensitive, with caps is case sensitive
 syntax enable
 
@@ -67,6 +71,8 @@ noremap <silent> <F4> :let @+=expand("%:p")<CR>
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>gg=G<C-o><C-o>
 
 nnoremap <leader>sv :source $MYVIMRC<CR>
+" leader c means leader count
+nnoremap <leader>c :%s///gn<CR>
 
 " if file type is asp, set syntax to php
 augroup asp_php
@@ -125,6 +131,8 @@ set clipboard=unnamedplus
 " trying out a new binding recommendation, H and L will jump to end line/start
 nnoremap L $
 nnoremap H ^
+nnoremap <C-l> zl
+nnoremap <C-h> zh
 " inoremap <C-d> <Del>
 " inoremap <BS> <nop>
 " inoremap <C-b> <Left>
@@ -136,8 +144,13 @@ inoremap <C-h> <nop>
 inoremap <C-b> <nop>
 inoremap <C-f> <nop>
  
-" let g:dbext_default_profile_live_export = 'type=MYSQL:user=root:passwd=`cat ./dbext_pw.txt`:dbname=publicschoolworks'
+let g:dbext_default_profile_AccidentReports = 'type=MYSQL:user=root:passwd=`cat /home/bbenzinger/pw.txt`:dbname=AccidentReports'
+let g:dbext_default_profile_LMS = 'type=MYSQL:user=root:passwd=`cat /home/bbenzinger/pw.txt`:dbname=LMS'
+let g:dbext_default_profile_pbs = 'type=MYSQL:user=root:passwd=`cat /home/bbenzinger/pw.txt`:dbname=pbs'
+let g:dbext_default_profile_publicschoolworks = 'type=MYSQL:user=root:passwd=`cat /home/bbenzinger/pw.txt`:dbname=publicschoolworks'
+let g:dbext_default_profile_SAR = 'type=MYSQL:user=root:passwd=`cat /home/bbenzinger/pw.txt`:dbname=SAR'
 let g:dbext_default_buffer_lines = 50
+let g:dbext_default_profile = 'publicschoolworks'
 
 set path+=/php/includes
 set path+=/php/smarty/templates
@@ -150,3 +163,14 @@ augroup filetype_html
     autocmd!
     autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
 augroup END
+
+" set the tags files
+set tags=/php/includes/tags
+set tags+=/var/www/Prosum/tags
+set tags+=/php/smarty/templates/tags
+
+" this is the function that runs after a execute dbext queries
+function! DBextPostResult(db_type, buf_nr)
+  :exe "normal \<C-W>="
+  :set syntax=sql
+endfunction
