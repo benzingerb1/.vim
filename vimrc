@@ -3,31 +3,42 @@
 " :PlugClean! will remove plugins missing from call plug()
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
-    Plug 'joshdick/onedark.vim'
-    Plug 'mattn/emmet-vim'
-    " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-    Plug 'sheerun/vim-polyglot'
-    " Plug 'Yggdroot/indentLine'
-    Plug 'vim-airline/vim-airline'
-    Plug 'google/vim-searchindex'
-    Plug 'vim-scripts/dbext.vim'
-    Plug 'junegunn/vim-plug'
+Plug 'joshdick/onedark.vim'
+Plug 'kadekillary/Turtles'
+Plug 'mattn/emmet-vim'
+" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'sheerun/vim-polyglot'
+Plug 'dhruvasagar/vim-table-mode'
+" Plug 'Yggdroot/indentLine'
+Plug 'vim-airline/vim-airline'
+Plug 'google/vim-searchindex'
+Plug 'vim-scripts/dbext.vim'
+Plug 'junegunn/vim-plug'
 call plug#end()
 
 " set diffopt color
 set diffopt=iwhite
 
+" When doing auto-complete
+" Enter will select the option without leaving insert mode
+:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
 " Set plugin variables "
+syntax enable
+set termguicolors
 colorscheme onedark
+
 " Emmet leader key WOW finding a leader key that works is such a pain
 let g:user_emmet_expandabbr_key = '<C-@>'
 let g:user_emmet_leader_key='<F12>'
+
 " NERDTree
-noremap <F6> :NERDTreeToggle<CR>
-let NERDTreeShowLineNumbers=1
-autocmd FileType nerdtree setlocal relativenumber
+" noremap <F6> :NERDTreeToggle<CR>
+" let NERDTreeShowLineNumbers=1
+" autocmd FileType nerdtree setlocal relativenumber
+
 " vim-polyglot
-let g:polyglot_disabled = ['markdown', 'php']
+let g:polyglot_disabled = ['markdown', 'php', 'csv']
 " this is from StanAngeloff/php.vim, which is coming form vim-polyglot
 let php_sql_query = 1
 
@@ -42,7 +53,6 @@ inoremap <C-j> <Esc>:m .+1<CR>==
 inoremap <C-k> <Esc>:m .-2<CR>==
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
-
 
 " Leader key mapped to space
 let mapleader = "\<Space>"
@@ -59,7 +69,6 @@ set timeoutlen=1000 ttimeoutlen=50 " fix the annoying delay on esc
 set ignorecase " prefix searches with \C to set them as case-sensitive
 set nostartofline
 " set smartcase " search with no capitals is case insensitive, with caps is case sensitive
-syntax enable
 
 " open VIMRC
 noremap <F2> :tabnew $MYVIMRC<CR>
@@ -90,18 +99,23 @@ set matchtime=1 " that moment where the {} match each other is a lot shorter, le
 " let loaded_match_paren=1
 
 " leader mappings
+" clear line and enter input mode
 nnoremap <leader>d ^d$a
+" turn off highlights
 noremap <silent> <leader>n :noh<CR>
 noremap <leader>r :setlocal relativenumber!<CR>
+" swap single and double quotes
 noremap <leader>" :s/'/"/g<CR>:noh<CR><C-O>
 noremap <leader>' :s/"/'/g<CR>:noh<CR><C-O>
+" add single quotes around a string that's inside brackets []
 nnoremap <leader>[ f[lviw<esc>a'<esc>bi'<esc>lel
-
+" auto format json using jq (sudo apt install jq)
+autocmd FileType json nnoremap <buffer> <silent> <leader>j :%!jq .<CR>
 
 " this is for moving the cursor after expanding abbreviations
 function! Eatchar(pat)
-    let c = nr2char(getchar(0))
-    return (c =~ a:pat) ? '' : c
+  let c = nr2char(getchar(0))
+  return (c =~ a:pat) ? '' : c
 endfunc
 " :autocmd FileType javascript iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
 iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
@@ -113,8 +127,6 @@ iabbrev <silent> dd; ddump();<left><left><C-R>=Eatchar('\s')<CR>
 nnoremap U :echo "TURN OFF CAPS LOCK"<CR>
 nnoremap KJ :echo "TURN OFF CAPS LOCK"<CR>
 nnoremap K :echo "TURN OFF CAPS LOCK"<CR>
-
-
 
 " I'm going to try mouse resizing
 set mouse=n
@@ -133,17 +145,11 @@ nnoremap L $
 nnoremap H ^
 nnoremap <C-l> zl
 nnoremap <C-h> zh
-" inoremap <C-d> <Del>
-" inoremap <BS> <nop>
-" inoremap <C-b> <Left>
-" inoremap <C-f> <Right>
-" nnoremap L :echo "Try your new keyboard bindings"<CR>
-" nnoremap H :echo "Try your new keyboard bindings"<CR>
 inoremap <C-d> <nop>
 inoremap <C-h> <nop>
 inoremap <C-b> <nop>
 inoremap <C-f> <nop>
- 
+
 let g:dbext_default_profile_AccidentReports = 'type=MYSQL:user=root:passwd=`cat /home/bbenzinger/pw.txt`:dbname=AccidentReports'
 let g:dbext_default_profile_LMS = 'type=MYSQL:user=root:passwd=`cat /home/bbenzinger/pw.txt`:dbname=LMS'
 let g:dbext_default_profile_pbs = 'type=MYSQL:user=root:passwd=`cat /home/bbenzinger/pw.txt`:dbname=pbs'
@@ -156,12 +162,13 @@ set path+=/php/includes
 set path+=/php/smarty/templates
 set path+=/var/www/Prosum
 set path+=/var/www/Prosum/JSIncludes
+set path+=**
 
 let g:airline_powerline_fonts = 1
 
 augroup filetype_html
-    autocmd!
-    autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
+  autocmd!
+  autocmd FileType html nnoremap <buffer> <localleader>f Vatzf
 augroup END
 
 " set the tags files
