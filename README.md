@@ -5,10 +5,13 @@
 + Cursor changes between insert mode and normal mode. [StackOverflow](https://stackoverflow.com/a/42118416)
 + `<C-J>` and `<C-K>` will move line up and down (and if applicable, take you out of insert mode)
 + Leader key set to `<Space>`
-+ Tab expands to 4 spaces
-+ `<C-B>` and  `<C-F>` move back and forward in insert mode
-+ `<A-S-[arrow keys]` alter the window size when split
-+ Mouse will also adjust window size
+
++ `<F2>` opens vimrc
++ `<F3>` toggles local wrap
++ `<F4>` copies current buffer path to clipboard
++ `<F5>` formats indentation and removes trailing whitespace
++ `<F6>` ~~toggles NerdTree~~ began using buffers instead
++ `<F7>` opens cheatsheet.md, commands I'm working on internalizing
 
 ### vim-plug
 [GitHub](https://github.com/junegunn/vim-plug)
@@ -28,52 +31,16 @@ Plugins are automatically pulled from GitHub.
 
 ### Emmet-vim
 [GitHub](https://github.com/mattn/emmet-vim)
-Emmet's leader key is mapped to `<C-Y>`, but expand will happen with `<Tab>`
-
-
----
-
-### NERDTree
-[GitHub](https://github.com/scrooloose/nerdtree)
-Mapped to toggle on `<F6>` key, loaded "on-demand" by vim-plug
+Remapped Emmet expand to `<C-@>`, I couldn't disable expand so I put it out of the way with `<F12>`
 
 ---
 
 ### vim-polyglot
 [GitHub](https://github.com/sheerun/vim-polyglot)
 This helps color the syntax for different file types. 
-Turn off polyglot for markdown because it's a lot uglier than native vim/onedark colors:
+Turn off polyglot for several filetypes because the default seems to work better with my colorscheme
 
 ```
 let g:polyglot_disabled = ['markdown']
 ```
 
----
-
-### Other tricks
-
-`:qall` to quit all windows at once
-[You Don't Need Plugins](https://www.youtube.com/watch?v=XA2WjJbmmoM)
-for HTML: `cit` change inner tag, it works if you're inside the tag definition and not just between opening and closing tags
-you can verb a search
-`c/word<CR>` will delete everything up to "word" and enter insert mode
-`:scriptnames` will tell you what's been loaded
-check things that have been remapped:
-`:verbose map <C-N>`
-`:verbose nmap <C-R>`
-`:verbose cmap <C-K>` command mode
-`:verbose imap <C-O>`
-check defaults:
-`:h index`
-open a terminal (this is probably how I'm going to test a script without dropping my current view of the code):
-`:terminal`
-setlocal buffer:
-`:setlocal relativenumber`
-
-where to add specific settings
-~.vim/after/ftplugin/javacript.vim
-~.vim/after/ftplugin/python.vim
-read more in :h after and :ftplugin
-
-I want to write FileType specific vimrc stuff:
-`:h write-plugin`

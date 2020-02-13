@@ -1,29 +1,29 @@
-" Reload .vimrc and :PlugInstall to install plugins.
-" :PlugUpdate will change package settings
-" :PlugClean! will remove plugins missing from call plug()
+" :PlugInstall -> Reload vimrc first then run this to install.
+" :PlugUpdate  -> change package settings
+" :PlugClean!  -> remove plugins missing from call plug()
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.vim/plugged')
-Plug 'joshdick/onedark.vim'
-Plug 'kadekillary/Turtles'
-Plug 'mattn/emmet-vim'
-" Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'sheerun/vim-polyglot'
-Plug 'dhruvasagar/vim-table-mode'
-" Plug 'Yggdroot/indentLine'
-Plug 'vim-airline/vim-airline'
-Plug 'google/vim-searchindex'
-Plug 'vim-scripts/dbext.vim'
-Plug 'junegunn/vim-plug'
+  Plug 'joshdick/onedark.vim'
+  Plug 'mattn/emmet-vim'
+  " Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  Plug 'sheerun/vim-polyglot'
+  Plug 'dhruvasagar/vim-table-mode'
+  " Plug 'Yggdroot/indentLine'
+  Plug 'vim-airline/vim-airline'
+  Plug 'bling/vim-bufferline'
+  Plug 'google/vim-searchindex'
+  Plug 'vim-scripts/dbext.vim'
+  Plug 'junegunn/vim-plug'
 call plug#end()
 
-" set diffopt color
+" this improves diff readability
 set diffopt=iwhite
 
 " When doing auto-complete
 " Enter will select the option without leaving insert mode
 :inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Set plugin variables "
+"
 syntax enable
 set termguicolors
 colorscheme onedark
@@ -32,10 +32,12 @@ colorscheme onedark
 let g:user_emmet_expandabbr_key = '<C-@>'
 let g:user_emmet_leader_key='<F12>'
 
+let g:bufferline_echo=0
+
 " NERDTree
 " noremap <F6> :NERDTreeToggle<CR>
 " let NERDTreeShowLineNumbers=1
-" autocmd FileType nerdtree setlocal relativenumber
+" autocmd FileType nerdtree metlocal relativenumber
 
 " vim-polyglot
 let g:polyglot_disabled = ['markdown', 'php', 'csv']
@@ -58,7 +60,7 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 let mapleader = "\<Space>"
 
 " some vim basics
-set number
+
 set showcmd
 set hlsearch
 set nowrap
@@ -78,10 +80,8 @@ noremap <F3> :setlocal wrap!<CR>
 noremap <silent> <F4> :let @+=expand("%:p")<CR>
 " delete trailing spaces and fix indentation
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>gg=G<C-o><C-o>
-
-nnoremap <leader>sv :source $MYVIMRC<CR>
-" leader c means leader count
-nnoremap <leader>c :%s///gn<CR>
+" open cheatsheet
+noremap <F7> :tabnew ~/.vim/cheatsheet.md<CR>
 
 " if file type is asp, set syntax to php
 augroup asp_php
@@ -93,17 +93,23 @@ augroup END
 set tabstop=2
 set shiftwidth=2
 set expandtab
-set shiftround " when you tab and >> and <C-T> it will automatically round out to 4
-set formatoptions-=cro " format options: don't automatically insert comments on i_o or i_O
+set shiftround " when you tab and >> and <C-T> it will automatically round out to 2
+set formatoptions-=cro " format options: don't automatically insert comments on i_o or i_O... this is clearly not working
 set matchtime=1 " that moment where the {} match each other is a lot shorter, less annoying, read more-  :h 'sm
-" let loaded_match_paren=1
 
 " leader mappings
+" source vimrc
+nnoremap <leader>sv :source $MYVIMRC<CR>
+" leader c means leader count
+nnoremap <leader>c :%s///gn<CR>
+" set number
+noremap <silent> <leader>n :set number!<CR>
+" toggle relative number
+noremap <leader>r :setlocal relativenumber!<CR>
 " clear line and enter input mode
 nnoremap <leader>d ^d$a
 " turn off highlights
-noremap <silent> <leader>n :noh<CR>
-noremap <leader>r :setlocal relativenumber!<CR>
+noremap <silent> <leader>h :nohlsearch<CR>
 " swap single and double quotes
 noremap <leader>" :s/'/"/g<CR>:noh<CR><C-O>
 noremap <leader>' :s/"/'/g<CR>:noh<CR><C-O>
@@ -112,12 +118,18 @@ nnoremap <leader>[ f[lviw<esc>a'<esc>bi'<esc>lel
 " auto format json using jq (sudo apt install jq)
 autocmd FileType json nnoremap <buffer> <silent> <leader>j :%!jq .<CR>
 
+" buffer shortcuts
+noremap <leader>b :b<space>
+noremap <leader>bd :bdelete 
+" buffer surfing
+:nnoremap <Tab> :bnext<CR>
+:nnoremap <S-Tab> :bprevious<CR>
+
 " this is for moving the cursor after expanding abbreviations
 function! Eatchar(pat)
   let c = nr2char(getchar(0))
   return (c =~ a:pat) ? '' : c
 endfunc
-" :autocmd FileType javascript iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
 iabbrev <silent> cl; console.log();<left><left><C-R>=Eatchar('\s')<CR>
 iabbrev <silent> hr; echo "<hr>";<C-R>=Eatchar('\s')<CR>
 iabbrev <silent> pre; echo "<pre>";<C-R>=Eatchar('\s')<CR>
@@ -128,7 +140,7 @@ nnoremap U :echo "TURN OFF CAPS LOCK"<CR>
 nnoremap KJ :echo "TURN OFF CAPS LOCK"<CR>
 nnoremap K :echo "TURN OFF CAPS LOCK"<CR>
 
-" I'm going to try mouse resizing
+" mouse resize splits
 set mouse=n
 set ttymouse=xterm2
 set encoding=UTF-8
@@ -136,6 +148,9 @@ set encoding=UTF-8
 " wrap words in quotes
 nnoremap "" viw<esc>a"<esc>bi"<esc>lel
 nnoremap "' viw<esc>a'<esc>bi'<esc>lel
+
+" search for poorly formed associative arrays in
+cnoremap \badass \[[^'"$0-9]
 
 " copy to clipboard
 set clipboard=unnamedplus
@@ -165,6 +180,7 @@ set path+=/var/www/Prosum/JSIncludes
 set path+=**
 
 let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
 
 augroup filetype_html
   autocmd!
@@ -181,3 +197,4 @@ function! DBextPostResult(db_type, buf_nr)
   :exe "normal \<C-W>="
   :set syntax=sql
 endfunction
+
