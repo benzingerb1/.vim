@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-scripts/dbext.vim'
   Plug 'junegunn/vim-plug'
 call plug#end()
-
+ 
 " this improves diff readability
 set diffopt=iwhite
 
@@ -47,6 +47,13 @@ let php_sql_query = 1
 " set cursor
 let &t_SI = "\e[6 q"
 let &t_EI = "\e[2 q"
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\e[6 q\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\e[2 q\<Esc>\\"
+else
+    let &t_SI = "\e[6 q"
+    let &t_EI = "\e[2 q"
+endif
 
 " set move line behavior
 nnoremap <C-j> :m .+1<CR>==
