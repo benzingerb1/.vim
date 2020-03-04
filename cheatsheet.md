@@ -1,4 +1,13 @@
+### sessions
+:mksession ~/vim_sessions/mysession.vim
+:source ~/vim_sessions/mysession.vim
+Open with the -S option:
+$ vim -S ~/vim_sessions/mysession.vim
+
 ### buffers
+
+open existing buffer in split
+:vert sb#
 
 `:b <substring of open file>` will jump to the file you want!
 

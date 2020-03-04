@@ -21,7 +21,8 @@ set diffopt=iwhite
 
 " When doing auto-complete
 " Enter will select the option without leaving insert mode
-:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" this messed up my abbreviations unfortunately
+" :inoremap <expr> <Tab> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "
 syntax enable
